@@ -18,13 +18,14 @@ class PlgLogmanMtree extends ComLogmanPluginJoomla
 {
     protected function _getListingObjectData($data, $event)
     {
-        $id = $data->link_id;
+        if (!isset($data->link_name))
+        {
+            $items           = $this->_getItems($data->link_id, new KObjectConfig());
+            $item            = array_pop($items);
+            $data->link_name = $item->link_name;
+        }
 
-        $items = $this->_getItems($id, new KObjectConfig());
-
-        $item = current($items);
-
-        return array('id' => $id, 'name' => $item->link_name);
+        return array('id' => $data->link_id, 'name' => $data->link_name);
     }
 
     protected function _getItems($ids, KObjectConfig $config)
@@ -45,5 +46,34 @@ class PlgLogmanMtree extends ComLogmanPluginJoomla
         $items = $adapter->select($query, KDatabase::FETCH_OBJECT_LIST);
 
         return $items;
+    }
+
+    public function onContentAfterSave($context, $content, $isNew)
+    {
+        $data = array(
+            'context' => $context,
+            'data'    => $content,
+            'event'   => 'onContentAfterSave'
+        );
+
+        $task = $this->getObject('request')->getData()->task;
+
+        if (isset($task) && $task == 'approve_publish_links')
+        {
+            $data['verb']   = 'approve';
+            $data['result'] = 'approved';
+        }
+        else  $data['verb'] = $isNew ? 'add' : 'edit';
+
+        $this->log($data);
+    }
+
+    public function onContentChangeState($context, $pks, $state)
+    {
+        $data = $this->getObject('request')->getData();
+
+        if (isset($data->task) && in_array($data->task, array('link_publish', 'link_unpublished'))) {
+            parent::onContentChangeState($context, $pks, $state);
+        }
     }
 }

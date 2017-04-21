@@ -31,6 +31,7 @@
                 <action>delete</action>
                 <action>publish</action>
                 <action>unpublish</action>
+                <action>approve</action>
             </actions>
         </resource>
     </resources>

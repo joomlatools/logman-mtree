@@ -31,4 +31,15 @@ class PlgLogmanMtreeActivityMtree extends ComLogmanModelEntityActivity
 
         parent::_objectConfig($config);
     }
+
+    public function getPropertyImage()
+    {
+        if ($this->verb == 'approve') {
+            $image = 'k-icon-check';
+        } else {
+            $image = parent::getPropertyImage();
+        }
+
+        return $image;
+    }
 }

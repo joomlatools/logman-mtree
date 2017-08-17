@@ -7,18 +7,11 @@ Plugin for integrating [Mosets Tree](https://www.mosets.com/tree/) with LOGman. 
 
 ### Composer
 
-You can install this package using [Composer](https://getcomposer.org/). Create a `composer.json` file inside the root directory of your Joomla! site containing the following code:
+You can install this package using [Composer](https://getcomposer.org/). Then run the following console command from the root directory of your Joomla! site:
 
 ```
-{
-    "require": {        
-        "joomlatools/plg_logman_mtree": "dev-master"
-    },
-    "minimum-stability": "dev"
-}
+composer require joomlatools/logman-mtree:dev-master
 ```
-
-Run composer install.
 
 ### Package
 

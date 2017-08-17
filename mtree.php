@@ -72,7 +72,7 @@ class PlgLogmanMtree extends ComLogmanPluginJoomla
     {
         $data = $this->getObject('request')->getData();
 
-        if (isset($data->task) && in_array($data->task, array('link_publish', 'link_unpublished'))) {
+        if (isset($data->task) && in_array($data->task, array('link_publish', 'link_unpublish'))) {
             parent::onContentChangeState($context, $pks, $state);
         }
     }

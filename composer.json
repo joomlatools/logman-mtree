@@ -1,7 +1,7 @@
 {
   "name": "joomlatools/logman-mtree",
   "type": "joomlatools-composer",
-  "license": "GPLv3",
+  "license": "GPL-3.0-only",
   "description": "Handles logging of Mosets Tree events",
   "keywords": [
     "joomla",
